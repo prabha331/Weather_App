@@ -1,42 +1,42 @@
 
 .battery-container {
-	flex: 3; /* Making it the dominant section */
+	flex: 3; 
 	padding: 50px;
 	border-radius: 15px;
 	background: #f5f5f5;
 	text-align: center;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-	width: 90vw; /* Make it take most of the screen width */
-	max-width: 1400px; /* Large for better visibility */
+	width: 90vw; 
+	max-width: 1400px; 
 	margin: 40px auto;
   }
   
-  .battery-container:hover {
+.battery-container:hover {
 	transform: scale(1.02);
 	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   }
   
-  /* Graph Container */
-  .graph-container {
+
+.graph-container {
 	width: 100%;
-	height: 500px; /* Large height for better visibility */
+	height: 500px; 
 	background: #ffffff;
 	border-radius: 10px;
 	padding: 25px;
 	box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.05);
   }
   
-  /* Headings */
-  h2 {
+
+.h2 {
 	font-size: 28px;
 	font-weight: bold;
 	color: #222;
 	margin-bottom: 15px;
   }
   
-  /* Temperature Information */
-  .temperature-info {
+ 
+.temperature-info {
 	font-size: 22px;
 	font-weight: bold;
 	margin-bottom: 15px;
