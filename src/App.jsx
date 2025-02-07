@@ -9,12 +9,12 @@ const App = () => {
   const [batteryData, setBatteryData] = useState([]);
   const [localTemps, setLocalTemps] = useState([]);
 
-  // Function to receive local temperature from Weather component
+  
   const handleLocalTempUpdate = (temperature) => {
     setLocalTemp(temperature);
   };
 
-  // Fetch battery temperature every minute and update the graph
+
   useEffect(() => {
     const fetchBatteryTemp = () => {
       navigator.getBattery().then((battery) => {
@@ -27,12 +27,12 @@ const App = () => {
       });
     };
 
-    // Initial fetch and then update every minute
+
     fetchBatteryTemp();
     const interval = setInterval(fetchBatteryTemp, 60000);
 
     return () => clearInterval(interval);
-  }, [localTemp]); // Depend on localTemp so it updates properly
+  }, [localTemp]); 
 
   return (
     <div className="app">

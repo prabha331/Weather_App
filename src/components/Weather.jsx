@@ -57,7 +57,7 @@ const Weather = ({ onLocalTempUpdate }) => {
         icon: icon,
       });
 
-      // ✅ Send temperature to App.js
+
       onLocalTempUpdate(temp);
     } catch (error) {
       console.error("Error fetching weather data:", error);

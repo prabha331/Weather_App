@@ -11,7 +11,7 @@ const BatteryGraph = () => {
   const [ambientTemp, setAmbientTemp] = useState(null);
   const [currentLocalTemp, setCurrentLocalTemp] = useState(null);
 
-  // Receive updated local temperature from Weather component
+
   const handleLocalTempUpdate = (temp) => {
     setCurrentLocalTemp(temp);
   };
@@ -21,19 +21,18 @@ const BatteryGraph = () => {
       const currentTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
       try {
-        // Wait until the local temperature is available
+   
         if (currentLocalTemp === null) return;
 
         // Fetch battery data
         const battery = await navigator.getBattery();
-        const batteryTemp = (battery.level * 100).toFixed(1); // Simulated battery temp
+        const batteryTemp = (battery.level * 100).toFixed(1); 
 
-        // ✅ Update timestamp, battery temp, and local temp together
+ 
         setTimestamps((prev) => [...prev, currentTime]);
         setBatteryData((prev) => [...prev, batteryTemp]);
         setLocalTemps((prev) => [...prev, currentLocalTemp]);
 
-        // ✅ Calculate ambient temperature correctly
         const newAmbientTemp = ((parseFloat(batteryTemp) + currentLocalTemp) / 2).toFixed(1);
         setAmbientTemp(newAmbientTemp);
       } catch (error) {
@@ -41,14 +40,14 @@ const BatteryGraph = () => {
       }
     };
 
-    fetchTemperatureData(); // Fetch immediately on component mount
+    fetchTemperatureData(); 
 
-    const interval = setInterval(fetchTemperatureData, 60000); // ✅ Update every 1 minute
+    const interval = setInterval(fetchTemperatureData, 60000); 
 
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [currentLocalTemp]); // ✅ Runs when local temp updates
+    return () => clearInterval(interval); 
+  }, [currentLocalTemp]); 
 
-  // Update graph when new data arrives
+
   const chartData = {
     labels: timestamps,
     datasets: [
