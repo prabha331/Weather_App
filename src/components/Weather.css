@@ -1,0 +1,109 @@
+.weather {
+    place-self: center;
+    padding: 40px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.weather:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.search-bar input {
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    padding: 0 20px;
+    color: #333;
+    background: #ffffff;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    background: #e3f2fd;
+}
+
+.search-bar img {
+    width: 45px;
+    padding: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-bar img:hover {
+    background: #e3f2fd;
+}
+
+.weather-icon {
+    width: 140px;
+    margin: 20px 0;
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.temperature {
+    color: #ffffff;
+    font-size: 80px;
+    font-weight: 700;
+    margin: 10px 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.location {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.we_data {
+    width: 100%;
+    margin-top: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.we_data .col {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.we_data .col span {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.we_data .col img {
+    width: 28px;
+}
