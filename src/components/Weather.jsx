@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "./Weather.css";
 import search_icon from "../assets/search.png";
 import clear_icon from "../assets/clear.png";  
@@ -12,6 +12,7 @@ import humidity_icon from "../assets/humidity.png";
 const Weather = ({ onLocalTempUpdate }) => {
   const inputRef = useRef();
   const [weatherData, setWeatherData] = useState(null);
+  const [error, setError] = useState("");
 
   const allIcons = {
     "01d": clear_icon,
@@ -29,51 +30,76 @@ const Weather = ({ onLocalTempUpdate }) => {
     "13n": snow_icon,
   };
 
-  const search = async (city) => {
+  // const search = async () => {
+  //   const city = inputRef.current.value.trim();
+  //   if (!city) {
+  //     alert("Enter City Name");
+  //     return;
+  //   }
+  //   setError(""); // Clear previous error
+
+  //   try {
+  //     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+
+  //     if (!response.ok) {
+  //       console.error("API Error:", data);
+  //       setError(data.message);
+  //       alert("City not found. Please enter a valid city name."); // Show an alert for invalid cities
+  //       return;
+  //     }
+  const search = async () => {
+    const city = inputRef.current.value.trim();
     if (!city) {
-      alert("Enter City Name");
-      return;
+        alert("Enter City Name");
+        return;
     }
+    setError(""); // Clear previous error
 
     try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
-      const response = await fetch(url);
-      const data = await response.json();
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
+        const response = await fetch(url);
+        const data = await response.json();
 
-      if (!response.ok) {
-        console.error("API Error:", data);
-        alert(data.message);
-        return;
-      }
+        if (!response.ok) {
+            console.error("API Error:", data);
+            setError(""); // Clear error message in UI
+            setWeatherData(null); // Clear previous weather data
+            alert("City not found. Please enter a valid city name.");
+            return;
+        }
 
-      const icon = allIcons[data.weather[0].icon] || clear_icon;
-      const temp = Math.floor(data.main.temp);
+        const icon = allIcons[data.weather[0].icon] || clear_icon;
+        const temp = Math.floor(data.main.temp);
 
-      setWeatherData({
-        humidity: data.main.humidity,
-        windSpeed: data.wind.speed,
-        temperature: temp,
-        location: data.name,
-        icon: icon,
-      });
+        setWeatherData({
+            humidity: data.main.humidity,
+            windSpeed: data.wind.speed,
+            temperature: temp,
+            location: data.name,
+            icon: icon,
+        });
 
-
-      onLocalTempUpdate(temp);
+        onLocalTempUpdate(temp);
     } catch (error) {
-      console.error("Error fetching weather data:", error);
+        console.error("Error fetching weather data:", error);
+        setError(""); // Clear error message in UI
+        setWeatherData(null); // Clear previous weather data
+        alert("Failed to fetch weather data. Please check your internet connection and try again.");
     }
-  };
+};
 
-  useEffect(() => {
-    search("Kanchipuram");
-  }, []);
 
   return (
     <div className="weather">
       <div className="search-bar">
         <input ref={inputRef} type="text" placeholder="Search" />
-        <img src={search_icon} alt="" onClick={() => search(inputRef.current.value)} />
+        <img src={search_icon} alt="" onClick={search} />
       </div>
+
+      {error && <p className="error-message">{error}</p>}
+
       {weatherData && (
         <>
           <img src={weatherData.icon} className="weather_icon" alt="weather icon" />
